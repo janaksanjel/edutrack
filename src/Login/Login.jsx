@@ -1,9 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import logo from "../../src/assets/logo.png";
+import logo from "../../src/assets/logohome.png";
+import { useNavigate } from "react-router-dom"; // Add this for navigation
 import "./Login.css";
+
 const Login = () => {
+  const [username, setUsername] = useState(""); // For username input
+  const [password, setPassword] = useState(""); // For password input
+  const navigate = useNavigate(); // Initialize navigate
+
+  // Static credentials
+  const correctUsername = "admin";
+  const correctPassword = "admin";
+
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Validate credentials
+    if (username === correctUsername && password === correctPassword) {
+      // Redirect to /dashboard on success
+      navigate("/dashboard");
+    } else {
+      alert("Incorrect username or password");
+    }
+  };
+
   return (
     <div className="login-body d-flex justify-content-center align-items-center vh-100 position-relative">
       <div className="bubble-container">
@@ -38,7 +61,9 @@ const Login = () => {
             }}
           />
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
+          {" "}
+          {/* Add onSubmit handler */}
           <div className="input-group mb-3">
             <span
               className="input-group-text bg-white border-end-0"
@@ -57,19 +82,13 @@ const Login = () => {
               type="text"
               className="form-control border-start-0"
               placeholder="Username"
+              value={username} // Controlled component
+              onChange={(e) => setUsername(e.target.value)} // Handle username change
               style={{
                 borderRadius: "25px",
                 border: "2px solid #ddd",
                 paddingLeft: "20px",
                 transition: "all 0.3s ease",
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#28a745";
-                e.target.style.boxShadow = "0 0 5px rgba(17, 0, 255, 0.5)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#ddd";
-                e.target.style.boxShadow = "none";
               }}
             />
           </div>
@@ -91,19 +110,13 @@ const Login = () => {
               type="password"
               className="form-control border-start-0"
               placeholder="Password"
+              value={password} // Controlled component
+              onChange={(e) => setPassword(e.target.value)} // Handle password change
               style={{
                 borderRadius: "25px",
                 border: "2px solid #ddd",
                 paddingLeft: "20px",
                 transition: "all 0.3s ease",
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#28a745";
-                e.target.style.boxShadow = "0 0 5px rgba(17, 0, 255, 0.5)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#ddd";
-                e.target.style.boxShadow = "none";
               }}
             />
           </div>
