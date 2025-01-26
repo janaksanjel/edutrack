@@ -1,49 +1,46 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import logo from "../../src/assets/logo.png";
+import logo from "../../src/assets/logohome.png";
+import { useNavigate } from "react-router-dom"; // Add this for navigation
+import "./Login.css";
 
 const Login = () => {
-  useEffect(() => {
-    // Generate 70 bubbles directly in the body
-    const bubbleContainer = document.body;
+  const [username, setUsername] = useState(""); // For username input
+  const [password, setPassword] = useState(""); // For password input
+  const navigate = useNavigate(); // Initialize navigate
 
-    const generateBubbles = () => {
-      const totalBubbles = 70; // Number of bubbles
-      for (let i = 0; i < totalBubbles; i++) {
-        const bubble = document.createElement("div");
-        bubble.classList.add("bubble");
+  // Static credentials
+  const correctUsername = "admin";
+  const correctPassword = "admin";
 
-        // Randomize bubble size
-        const size = Math.random() * (30 - 10) + 10; // Size between 10px and 30px
-        bubble.style.width = `${size}px`;
-        bubble.style.height = `${size}px`;
+  // Handle form submission
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
-        // Randomize horizontal position (left/right/center)
-        const left = Math.random() * 100; // Random position on the X-axis (0% to 100%)
-        bubble.style.left = `${left}%`;
-
-        // Randomize vertical position (height at the bottom of the screen)
-        const bottom = Math.random() * 50 + 50; // Bubbles start between 50px and 100px from the bottom
-        bubble.style.bottom = `${bottom}px`;
-
-        // Randomize animation duration and delay
-        const duration = Math.random() * (8 - 4) + 4; // Random duration between 4s and 8s
-        const delay = Math.random() * 5; // Random delay for animation
-        bubble.style.animationDuration = `${duration}s`;
-        bubble.style.animationDelay = `-${delay}s`;
-
-        // Append to body
-        bubbleContainer.appendChild(bubble);
-      }
-    };
-
-    // Call the function to generate bubbles
-    generateBubbles();
-  }, []);
+    // Validate credentials
+    if (username === correctUsername && password === correctPassword) {
+      // Redirect to /dashboard on success
+      navigate("/dashboard");
+    } else {
+      alert("Incorrect username or password");
+    }
+  };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 position-relative">
+    <div className="login-body d-flex justify-content-center align-items-center vh-100 position-relative">
+      <div className="bubble-container">
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className="bubble"></div>
+        ))}
+      </div>
+
+      <div className="bubble-container">
+        {[...Array(20)].map((_, i) => (
+          <div key={i} className="bubble"></div>
+        ))}
+      </div>
+
       <div
         className="cantainer card p-4 border-0 rounded"
         style={{
@@ -64,7 +61,9 @@ const Login = () => {
             }}
           />
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
+          {" "}
+          {/* Add onSubmit handler */}
           <div className="input-group mb-3">
             <span
               className="input-group-text bg-white border-end-0"
@@ -83,19 +82,13 @@ const Login = () => {
               type="text"
               className="form-control border-start-0"
               placeholder="Username"
+              value={username} // Controlled component
+              onChange={(e) => setUsername(e.target.value)} // Handle username change
               style={{
                 borderRadius: "25px",
                 border: "2px solid #ddd",
                 paddingLeft: "20px",
                 transition: "all 0.3s ease",
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#28a745";
-                e.target.style.boxShadow = "0 0 5px rgba(17, 0, 255, 0.5)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#ddd";
-                e.target.style.boxShadow = "none";
               }}
             />
           </div>
@@ -117,19 +110,13 @@ const Login = () => {
               type="password"
               className="form-control border-start-0"
               placeholder="Password"
+              value={password} // Controlled component
+              onChange={(e) => setPassword(e.target.value)} // Handle password change
               style={{
                 borderRadius: "25px",
                 border: "2px solid #ddd",
                 paddingLeft: "20px",
                 transition: "all 0.3s ease",
-              }}
-              onFocus={(e) => {
-                e.target.style.borderColor = "#28a745";
-                e.target.style.boxShadow = "0 0 5px rgba(17, 0, 255, 0.5)";
-              }}
-              onBlur={(e) => {
-                e.target.style.borderColor = "#ddd";
-                e.target.style.boxShadow = "none";
               }}
             />
           </div>
@@ -143,8 +130,12 @@ const Login = () => {
               padding: "10px 20px",
               transition: "all 0.3s ease",
             }}
-            onMouseOver={(e) => (e.target.style.backgroundColor = "#28a745e6")}
-            onMouseOut={(e) => (e.target.style.backgroundColor = "#28a745")}
+            onMouseOver={(e) => {
+              e.target.style.backgroundColor = "#007bff"; // Blue on hover
+            }}
+            onMouseOut={(e) => {
+              e.target.style.backgroundColor = "#28a745"; // Original green color
+            }}
           >
             Sign In
           </button>

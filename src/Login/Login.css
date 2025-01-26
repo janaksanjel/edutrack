@@ -1,0 +1,285 @@
+/* Global Styles */
+.login-body {
+  font-weight: 400;
+  height: 100vh;
+  background: linear-gradient(#9bf8ab, #082a68, fuchsia);
+
+  /* Necessary for absolute positioning of bubbles */
+}
+
+/* Create the bubbles */
+@keyframes bubble-animation {
+  0% {
+    transform: translateY(0) scale(0.3);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+
+
+/* Container Styles */
+.cantainer {
+  border-radius: 12px 12px 20px 20px;
+  width: 350px;
+  z-index: 999;
+  margin-top: calc(26vh - 100px);
+  /* background: linear-gradient(#2d6fa8, #5a1123); */
+  background: linear-gradient(#082a68, fuchsia);
+
+  /* padding-bottom: 80px; */
+  box-shadow: -1px 1px 25px -11px rgba(0, 0, 0, 0.75);/
+}
+
+
+/* Bubble animation styles */
+.bubble-container {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 1;
+  pointer-events: none;
+  /* Prevent interaction */
+}
+
+.bubble {
+  position: absolute;
+  bottom: -20px;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  animation: rise 5s infinite ease-in;
+  opacity: 0;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(0.5);
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-100vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Randomize bubble sizes and speeds */
+.bubble:nth-child(1) {
+  left: 10%;
+  animation-duration: 4s;
+  width: 6px;
+  height: 6px;
+}
+
+.bubble:nth-child(2) {
+  left: 20%;
+  animation-duration: 5s;
+  width: 8px;
+  height: 8px;
+}
+
+.bubble:nth-child(3) {
+  left: 30%;
+  animation-duration: 3s;
+  width: 10px;
+  height: 10px;
+}
+
+.bubble:nth-child(4) {
+  left: 40%;
+  animation-duration: 6s;
+  width: 12px;
+  height: 12px;
+}
+
+.bubble:nth-child(5) {
+  left: 50%;
+  animation-duration: 4s;
+  width: 14px;
+  height: 14px;
+}
+
+.bubble:nth-child(6) {
+  left: 60%;
+  animation-duration: 5.5s;
+  width: 6px;
+  height: 6px;
+}
+
+.bubble:nth-child(7) {
+  left: 70%;
+  animation-duration: 7s;
+  width: 8px;
+  height: 8px;
+}
+
+.bubble:nth-child(8) {
+  left: 80%;
+  animation-duration: 3.5s;
+  width: 10px;
+  height: 10px;
+}
+
+.bubble:nth-child(9) {
+  left: 90%;
+  animation-duration: 6.5s;
+  width: 12px;
+  height: 12px;
+}
+
+.bubble:nth-child(10) {
+  left: 25%;
+  animation-duration: 4.5s;
+  width: 6px;
+  height: 6px;
+}
+
+.bubble:nth-child(11) {
+  left: 35%;
+  animation-duration: 5.5s;
+  width: 8px;
+  height: 8px;
+}
+
+.bubble:nth-child(12) {
+  left: 45%;
+  animation-duration: 3.5s;
+  width: 10px;
+  height: 10px;
+}
+
+.bubble:nth-child(13) {
+  left: 55%;
+  animation-duration: 6s;
+  width: 12px;
+  height: 12px;
+}
+
+.bubble:nth-child(14) {
+  left: 65%;
+  animation-duration: 4.5s;
+  width: 6px;
+  height: 6px;
+}
+
+.bubble:nth-child(15) {
+  left: 75%;
+  animation-duration: 5s;
+  width: 8px;
+  height: 8px;
+}
+
+.bubble:nth-child(16) {
+  left: 85%;
+  animation-duration: 3s;
+  width: 10px;
+  height: 10px;
+}
+
+.bubble:nth-child(17) {
+  left: 95%;
+  animation-duration: 6.5s;
+  width: 12px;
+  height: 12px;
+}
+
+.bubble:nth-child(18) {
+  left: 15%;
+  animation-duration: 4s;
+  width: 6px;
+  height: 6px;
+}
+
+.bubble:nth-child(19) {
+  left: 35%;
+  animation-duration: 5.5s;
+  width: 8px;
+  height: 8px;
+}
+
+.bubble:nth-child(20) {
+  left: 55%;
+  animation-duration: 3.5s;
+  width: 10px;
+  height: 10px;
+}
+
+/* Full-page loading overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  /* Ensure it's on top of everything */
+}
+
+/* From Uiverse.io by catraco */
+.spinner {
+  --size: 50px;
+  --first: #005bba;
+  --second: #fed500;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  animation: spin 3s linear infinite;
+}
+
+.spinner::before,
+.spinner::after {
+  content: "";
+  width: var(--size);
+  height: var(--size);
+  border: 4px solid var(--first);
+  border-top: 4px solid var(--second);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: spinRing 1.5s ease-out infinite;
+  box-shadow: 0 0 10px var(--first);
+}
+
+.spinner::before {
+  filter: blur(10px);
+}
+
+@keyframes spinRing {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
